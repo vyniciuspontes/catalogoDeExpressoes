@@ -1,13 +1,15 @@
 package servicostecnicos;
 
-import dominio.CatalogoDeExpressao;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -15,38 +17,61 @@ import java.io.ObjectOutputStream;
  */
 public class CatalogoDAO {
 
+    private final String ARQUIVO = "catalogo.txt";
+
     private static CatalogoDAO instance;
-    
-    public static CatalogoDAO getInstance(){
-        
-        if(instance == null)
+
+    public static CatalogoDAO getInstance() {
+
+        if (instance == null) {
             return new CatalogoDAO();
-        else
+        } else {
             return instance;
+        }
     }
-    
-    public boolean salvarCatalogo(CatalogoDeExpressao catalogo) {
-        File catalagoFile = new File("Catalogo de Expressao.txt");
+
+    public boolean salvarCatalogo(List<String> catalogo) {
+        File catalagoFile = new File(ARQUIVO);
         try {
-            FileOutputStream fileOutput = new FileOutputStream(catalagoFile);
-            ObjectOutputStream objectOutput = new ObjectOutputStream(fileOutput);
-            objectOutput.writeObject(catalogo);
+            PrintStream printStream = new PrintStream(catalagoFile);
+            
+            for (String string : catalogo) {
+                printStream.append(string);
+                printStream.println();
+            }
+            
+            /*catalogo.forEach((string) -> {
+                printStream.append(string);
+                printStream.println();
+            });*/
             return true;
         } catch (IOException e) {
             return false;
         }
     }
 
-    public CatalogoDeExpressao readCollection() throws FileNotFoundException, IOException, ClassNotFoundException {
-        File catalagoFile = new File("Catalogo de Expressao.txt");
-        FileInputStream fileInput = new FileInputStream(catalagoFile);
-        
-        if(catalagoFile.length() == 0)
-            return null;
-        
-        ObjectInputStream objectInputStream = new ObjectInputStream(fileInput);
-        CatalogoDeExpressao catalogo = (CatalogoDeExpressao) objectInputStream.readObject();
-        return catalogo;
+    public List<String> lerCatalogo() {
+        try {
+            File catalagoFile = new File(ARQUIVO);
+            List<String> list = new ArrayList<>();
+            if (!catalagoFile.exists()) {
+                catalagoFile.createNewFile();
+                return list;
+            }
+
+            Scanner scanner = new Scanner(catalagoFile);
+            if (catalagoFile.length() == 0)
+                return list;
+            while (scanner.hasNext()) {
+                list.add(scanner.nextLine());
+            }
+
+            return list;
+        } catch (IOException ex) {
+            Logger.getLogger(CatalogoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        return null;
     }
-    
+
 }

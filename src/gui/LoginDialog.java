@@ -154,7 +154,7 @@ public class LoginDialog extends javax.swing.JDialog {
             JOptionPane.showMessageDialog(LoginDialog.this, "Bem vindo " + nome, "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
             adm.loginSucedido(usuarioVO);
-            this.setVisible(false);
+            this.dispose();
             
         } else {
             JOptionPane.showMessageDialog(LoginDialog.this, "Credenciais inválidas", "Erro",

@@ -5,7 +5,11 @@
  */
 package gui;
 
+import dominio.Expressao;
 import dominio.UsuarioVO;
+import dominio.controllers.CatalogoController;
+import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 
 /**
@@ -13,9 +17,19 @@ import javax.swing.UIManager;
  * @author Vynicius
  */
 public class TelaAdm extends javax.swing.JFrame {
-    
+
+    private DefaultListModel listDeExpressoes = new DefaultListModel();
+
     public TelaAdm() {
         initComponents();
+
+    }
+
+    public void carregarCatalogo() {
+        listDeExpressoes.clear();
+        CatalogoController.getInstance().listarExpressoes().forEach((expressao) -> {
+            listDeExpressoes.addElement(expressao);
+        });
     }
 
     /**
@@ -30,6 +44,12 @@ public class TelaAdm extends javax.swing.JFrame {
         jTabbedPane1 = new javax.swing.JTabbedPane();
         painelBusca = new javax.swing.JPanel();
         painelAlteracao = new javax.swing.JPanel();
+        jPanel1 = new javax.swing.JPanel();
+        botaoAdicionar = new javax.swing.JButton();
+        botaoAlterar = new javax.swing.JButton();
+        botaoRemover = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList2 = new javax.swing.JList<>();
         botaoLogin = new javax.swing.JButton();
         loginLabel = new javax.swing.JLabel();
 
@@ -40,26 +60,86 @@ public class TelaAdm extends javax.swing.JFrame {
         painelBusca.setLayout(painelBuscaLayout);
         painelBuscaLayout.setHorizontalGroup(
             painelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 536, Short.MAX_VALUE)
+            .addGap(0, 592, Short.MAX_VALUE)
         );
         painelBuscaLayout.setVerticalGroup(
             painelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGap(0, 267, Short.MAX_VALUE)
         );
 
         jTabbedPane1.addTab("Busca de Expressões", painelBusca);
 
         painelAlteracao.setFocusCycleRoot(true);
 
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        botaoAdicionar.setText("Adicionar Expressão");
+        botaoAdicionar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAdicionarActionPerformed(evt);
+            }
+        });
+
+        botaoAlterar.setText("Alterar Expressão");
+        botaoAlterar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoAlterarActionPerformed(evt);
+            }
+        });
+
+        botaoRemover.setText("Remover Expressão");
+        botaoRemover.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoRemoverActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(37, 37, 37)
+                .addComponent(botaoAdicionar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(60, 60, 60)
+                .addComponent(botaoAlterar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(58, 58, 58)
+                .addComponent(botaoRemover, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(36, 36, 36))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(35, 35, 35)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(botaoAdicionar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoAlterar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(botaoRemover, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(42, 42, 42))
+        );
+
+        jList2.setModel(listDeExpressoes);
+        jScrollPane2.setViewportView(jList2);
+
         javax.swing.GroupLayout painelAlteracaoLayout = new javax.swing.GroupLayout(painelAlteracao);
         painelAlteracao.setLayout(painelAlteracaoLayout);
         painelAlteracaoLayout.setHorizontalGroup(
             painelAlteracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 536, Short.MAX_VALUE)
+            .addGroup(painelAlteracaoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelAlteracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane2))
+                .addContainerGap())
         );
         painelAlteracaoLayout.setVerticalGroup(
             painelAlteracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 330, Short.MAX_VALUE)
+            .addGroup(painelAlteracaoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         jTabbedPane1.addTab("Alteração de Expressões", painelAlteracao);
@@ -109,12 +189,49 @@ public class TelaAdm extends javax.swing.JFrame {
         new LoginDialog(this, false).setVisible(true);
     }//GEN-LAST:event_botaoLoginActionPerformed
 
-    public void loginSucedido(UsuarioVO usuarioVO){
+    private void botaoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAlterarActionPerformed
+        if (this.jList2.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(TelaAdm.this, "Selecione algum elemento", "",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        System.out.println(this.jList2.getSelectedValue());
+        new AlterarExpressaoDialog(this, false, this.jList2.getSelectedValue()).setVisible(true);
+    }//GEN-LAST:event_botaoAlterarActionPerformed
+
+    private void botaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarActionPerformed
+        new AdicionarExpressaoDialog(this, false).setVisible(true);
+    }//GEN-LAST:event_botaoAdicionarActionPerformed
+
+    private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
+
+        if (this.jList2.getSelectedValue() == null) {
+            JOptionPane.showMessageDialog(TelaAdm.this, "Selecione algum elemento", "",
+                    JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+        
+        Boolean succeeded = CatalogoController.getInstance().removerExpressao(this.jList2.getSelectedValue());
+
+        if (succeeded) {
+            JOptionPane.showMessageDialog(TelaAdm.this, "Expressão Removida", "Sucesso",
+                    JOptionPane.INFORMATION_MESSAGE);
+            this.carregarCatalogo();
+
+        } else {
+            JOptionPane.showMessageDialog(TelaAdm.this, "Erro ao remover expressão: Expressão não encontrada", "Erro",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+    }//GEN-LAST:event_botaoRemoverActionPerformed
+
+    public void loginSucedido(UsuarioVO usuarioVO) {
         this.jTabbedPane1.setEnabledAt(1, true);
         this.botaoLogin.setVisible(false);
         this.loginLabel.setText("Administrador " + usuarioVO.getNome() + " logado");
+        carregarCatalogo();
     }
-    
+
     /**
      * @param args the command line arguments
      */
@@ -148,7 +265,13 @@ public class TelaAdm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton botaoAdicionar;
+    private javax.swing.JButton botaoAlterar;
     private javax.swing.JButton botaoLogin;
+    private javax.swing.JButton botaoRemover;
+    private javax.swing.JList<Expressao> jList2;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane jTabbedPane1;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel painelAlteracao;

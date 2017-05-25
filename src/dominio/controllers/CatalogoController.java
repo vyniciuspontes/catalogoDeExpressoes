@@ -5,7 +5,7 @@
  */
 package dominio.controllers;
 
-import dominio.CatalogoDeExpressao;
+import dominio.CatalogoDeExpressoes;
 import dominio.Expressao;
 import servicostecnicos.CatalogoDAO;
 import java.io.FileNotFoundException;
@@ -18,11 +18,15 @@ import java.util.List;
  */
 public class CatalogoController {
 
-    private CatalogoController() {}
+    private CatalogoDeExpressoes catalogo;
+
+    private CatalogoController() {
+        this.catalogo = new CatalogoDeExpressoes();
+    }
 
     private static CatalogoController instance;
 
-    public CatalogoController getInstance() {
+    static public CatalogoController getInstance() {
 
         if (instance == null) {
             return new CatalogoController();
@@ -35,30 +39,35 @@ public class CatalogoController {
         //return new CatalogoDeExpressao().containsExpressao(exp);
         return false;
     }
-
-    public boolean addExpression(String exp) {
-        return new CatalogoDeExpressao().adicionarExpressao(exp);
+    
+    public List<Expressao> listarExpressoes(){
+        return this.catalogo.listarExpressoes();
     }
 
-    public boolean changeExpression(Expressao exp, String newExpression) {
-        return new CatalogoDeExpressao().alterarExpressao(exp, newExpression);
+    public boolean adicionarExpressao(String exp) {
+        Expressao novaExpressao = new Expressao(exp);
+        return new CatalogoDeExpressoes().adicionarExpressao(novaExpressao);
+    }
 
+    public boolean alterarExpressao(Expressao anterior, String novoTexto) {
+        Expressao novaExpressao = new Expressao(novoTexto);
+        return new CatalogoDeExpressoes().alterarExpressao(anterior, novaExpressao);
     }
 
     public List<Expressao> listarPorLetraInicial(char letra) {
-        return new CatalogoDeExpressao().listarPorLetraInicial(letra);
+        return new CatalogoDeExpressoes().listarPorLetraInicial(letra);
     }
 
     public List<Expressao> listarPorPalavra(String palavra) {
-        return new CatalogoDeExpressao().listarPorPalavra(palavra);
+        return new CatalogoDeExpressoes().listarPorPalavra(palavra);
     }
 
     public List<Expressao> listarPorNumeroPalavras(int numero) {
-        return new CatalogoDeExpressao().listarPorNumeroPalavras(numero);
+        return new CatalogoDeExpressoes().listarPorNumeroPalavras(numero);
     }
-
-    public void salvarCatalogo(CatalogoDeExpressao catalogo) {
-        new CatalogoDAO().salvarCatalogo(catalogo);
+    
+    public boolean removerExpressao(Expressao expressao){
+        return this.catalogo.removerExpressao(expressao);
     }
 
 }
