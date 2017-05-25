@@ -5,7 +5,7 @@
  */
 package gui;
 
-import dominio.UsuarioVO;
+import dominio.Usuario;
 import dominio.controllers.CatalogoController;
 import dominio.controllers.LoginController;
 import java.awt.Frame;

@@ -6,7 +6,7 @@
 package gui;
 
 import dominio.controllers.LoginController;
-import dominio.UsuarioVO;
+import dominio.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -147,13 +147,13 @@ public class LoginDialog extends javax.swing.JDialog {
             return;
         }
         String password = String.copyValueOf(passwordField.getPassword());
-        UsuarioVO usuarioVO = LoginController.getInstance().fazerLogin(loginTextField.getText(), password);
+        Usuario usuario = LoginController.getInstance().fazerLogin(loginTextField.getText(), password);
 
-        if (usuarioVO != null) {
-            String nome = usuarioVO.getNome();
+        if (usuario != null) {
+            String nome = usuario.getNome();
             JOptionPane.showMessageDialog(LoginDialog.this, "Bem vindo " + nome, "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            adm.loginSucedido(usuarioVO);
+            adm.loginSucedido(usuario);
             this.dispose();
             
         } else {

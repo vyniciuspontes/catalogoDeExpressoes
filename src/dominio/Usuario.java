@@ -9,12 +9,12 @@ package dominio;
  *
  * @author marcussouza
  */
-public class UsuarioVO {
+public class Usuario {
 
     private String nome;
     private String login;
 
-    public UsuarioVO(String nome, String login) {
+    public Usuario(String nome, String login) {
         this.nome = nome;
         this.login = login;
     }

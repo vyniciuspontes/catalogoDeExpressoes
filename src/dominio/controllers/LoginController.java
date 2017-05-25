@@ -1,6 +1,6 @@
 package dominio.controllers;
 
-import dominio.UsuarioVO;
+import dominio.Usuario;
 import servicostecnicos.LoginDAO;
 import servicostecnicos.UsuarioDTO;
 
@@ -21,12 +21,12 @@ public class LoginController {
         }
     }
 
-    public UsuarioVO fazerLogin(String login, String senha) {
+    public Usuario fazerLogin(String login, String senha) {
         
         UsuarioDTO dto = LoginDAO.getInstance().autenticar(login, senha);
         
         if(dto != null)
-            return new UsuarioVO(dto.getNome(), dto.getLogin());
+            return new Usuario(dto.getNome(), dto.getLogin());
         
         return null;
     }

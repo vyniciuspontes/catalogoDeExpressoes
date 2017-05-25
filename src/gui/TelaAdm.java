@@ -6,7 +6,7 @@
 package gui;
 
 import dominio.Expressao;
-import dominio.UsuarioVO;
+import dominio.Usuario;
 import dominio.controllers.CatalogoController;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -392,7 +392,7 @@ public class TelaAdm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
-    public void loginSucedido(UsuarioVO usuarioVO) {
+    public void loginSucedido(Usuario usuarioVO) {
         this.listaAdm.setEnabledAt(1, true);
         this.botaoLogin.setVisible(false);
         this.loginLabel.setText("Administrador " + usuarioVO.getNome() + " logado");
