@@ -120,7 +120,7 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
         if (succeeded) {
             JOptionPane.showMessageDialog(AdicionarExpressaoDialog.this, "Expressão Adicionada", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            adm.carregarCatalogo();
+            adm.carregarListaAdm();
             this.dispose();
 
         } else {

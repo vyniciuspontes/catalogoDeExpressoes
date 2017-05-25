@@ -46,28 +46,36 @@ public class CatalogoController {
 
     public boolean adicionarExpressao(String exp) {
         Expressao novaExpressao = new Expressao(exp);
-        return new CatalogoDeExpressoes().adicionarExpressao(novaExpressao);
+        return this.catalogo.adicionarExpressao(novaExpressao);
     }
 
     public boolean alterarExpressao(Expressao anterior, String novoTexto) {
         Expressao novaExpressao = new Expressao(novoTexto);
-        return new CatalogoDeExpressoes().alterarExpressao(anterior, novaExpressao);
+        return this.catalogo.alterarExpressao(anterior, novaExpressao);
     }
 
     public List<Expressao> listarPorLetraInicial(char letra) {
-        return new CatalogoDeExpressoes().listarPorLetraInicial(letra);
+        return this.catalogo.listarPorLetraInicial(letra);
     }
 
     public List<Expressao> listarPorPalavra(String palavra) {
-        return new CatalogoDeExpressoes().listarPorPalavra(palavra);
+        return this.catalogo.listarPorPalavra(palavra);
     }
 
     public List<Expressao> listarPorNumeroPalavras(int numero) {
-        return new CatalogoDeExpressoes().listarPorNumeroPalavras(numero);
+        return this.catalogo.listarPorNumeroPalavras(numero);
     }
     
     public boolean removerExpressao(Expressao expressao){
         return this.catalogo.removerExpressao(expressao);
+    }
+
+    public List<Expressao> listarPorFraseExata(String frase) {
+        return this.catalogo.listarPorFraseExata(frase);
+    }
+
+    public List<Expressao> listarPorFraseLivre(String frase) {
+        return this.catalogo.listarPorFraseLivre(frase);
     }
 
 }

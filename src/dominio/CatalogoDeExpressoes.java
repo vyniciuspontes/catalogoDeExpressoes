@@ -6,7 +6,9 @@
 package dominio;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 import servicostecnicos.CatalogoDAO;
 
 /**
@@ -25,7 +27,7 @@ public class CatalogoDeExpressoes {
         List<String> textos = CatalogoDAO.getInstance().lerCatalogo();
         listaDeExpressoes = new ArrayList<>();
         textos.forEach((texto) -> {
-            listaDeExpressoes.add(new Expressao(texto));
+            listaDeExpressoes.add(new Expressao(texto.toLowerCase()));
         });
     }
 
@@ -76,40 +78,56 @@ public class CatalogoDeExpressoes {
     }
 
     public List<Expressao> listarPorLetraInicial(char letra) {
-        List<Expressao> arrayFinal = new ArrayList<>();
-        /*for(Expressao exp: setDeExpressoes){
-           if(exp.getExpressao().charAt(0) == letra){
-               arrayFinal.add(exp);
-           }
-       }*/
+        List<Expressao> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().charAt(0) == letra)
+                .collect(Collectors.toList());
 
-        return arrayFinal;
+        return result;
     }
 
     public List<Expressao> listarExpressoes() {
         return this.listaDeExpressoes;
     }
 
-    public List<Expressao> listarPorPalavra(String palavra) {
-        List<Expressao> arrayFinal = new ArrayList<>();
-        /*for(Expressao exp: setDeExpressoes){
-           if(exp.getExpressao().contains(palavra)){
-               arrayFinal.add(exp);
-           }
-       }*/
+    public List<Expressao> listarPorFraseLivre(String frase) {
+        List<Expressao> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().contains(frase))
+                .collect(Collectors.toList());
 
-        return arrayFinal;
+        return result;
     }
 
     public List<Expressao> listarPorNumeroPalavras(int numero) {
-        List<Expressao> arrayFinal = new ArrayList<>();
-        /*for(Expressao exp: setDeExpressoes){
-           if(exp.getExpressao().split(" ").length == numero){
-               arrayFinal.add(exp);
-           }
-       }*/
+        List<Expressao> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().trim().split(" ").length == numero)
+                .collect(Collectors.toList());
 
-        return arrayFinal;
+        return result;
+    }
+
+    public List<Expressao> listarPorFraseExata(String frase) {
+        List<Expressao> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().equals(frase))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    public List<Expressao> listarPorPalavra(String palavra) {
+
+        List<Expressao> result = listaDeExpressoes.stream()
+                .filter(expressao -> checkExpressaoContemPalavra(expressao, palavra))
+                .collect(Collectors.toList());
+
+        return result;
+    }
+
+    private boolean checkExpressaoContemPalavra(Expressao expressao, String palavra) {
+
+        String[] expressaoSplit = expressao.getTexto().split(" ");
+        List<String> expressaoSplitList = Arrays.asList(expressaoSplit);
+
+        return expressaoSplitList.contains(palavra);
     }
 
     public boolean contemExpressao(Expressao expressao) {
@@ -120,7 +138,7 @@ public class CatalogoDeExpressoes {
         List<String> textos = new ArrayList<>();
 
         listaDeExpressoes.forEach((expressao) -> {
-            textos.add(expressao.getTexto());
+            textos.add(expressao.getTexto().toLowerCase());
         });
 
         return CatalogoDAO.getInstance().salvarCatalogo(textos);

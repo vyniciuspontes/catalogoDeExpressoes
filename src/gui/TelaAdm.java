@@ -8,6 +8,7 @@ package gui;
 import dominio.Expressao;
 import dominio.UsuarioVO;
 import dominio.controllers.CatalogoController;
+import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 import javax.swing.UIManager;
@@ -18,17 +19,26 @@ import javax.swing.UIManager;
  */
 public class TelaAdm extends javax.swing.JFrame {
 
-    private DefaultListModel listDeExpressoes = new DefaultListModel();
+    private DefaultListModel listaAdmDeExpressoesModel = new DefaultListModel();
+
+    private DefaultListModel listaBuscaDeExpressoesModel = new DefaultListModel();
 
     public TelaAdm() {
         initComponents();
 
     }
 
-    public void carregarCatalogo() {
-        listDeExpressoes.clear();
+    public void carregarListaAdm() {
+        listaAdmDeExpressoesModel.clear();
         CatalogoController.getInstance().listarExpressoes().forEach((expressao) -> {
-            listDeExpressoes.addElement(expressao);
+            listaAdmDeExpressoesModel.addElement(expressao);
+        });
+    }
+    
+    private void carregarListaBusca(List<Expressao> expressoes) {
+        listaBuscaDeExpressoesModel.clear();
+        expressoes.forEach((expressao) -> {
+            listaBuscaDeExpressoesModel.addElement(expressao);
         });
     }
 
@@ -41,8 +51,23 @@ public class TelaAdm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        buttonGroup1 = new javax.swing.ButtonGroup();
+        listaAdm = new javax.swing.JTabbedPane();
         painelBusca = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        radioPorPalavra = new javax.swing.JRadioButton();
+        radioPorLetra = new javax.swing.JRadioButton();
+        radioPorQuantidade = new javax.swing.JRadioButton();
+        radioFraseExata = new javax.swing.JRadioButton();
+        campoPorPalavra = new javax.swing.JTextField();
+        campoPorLetra = new javax.swing.JTextField();
+        campoPorQuantidade = new javax.swing.JSpinner();
+        campoPorFraseExata = new javax.swing.JTextField();
+        botaoBuscar = new javax.swing.JButton();
+        radioBuscaLivre = new javax.swing.JRadioButton();
+        campoBuscaLivre = new javax.swing.JTextField();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        listaBusca = new javax.swing.JList<>();
         painelAlteracao = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
         botaoAdicionar = new javax.swing.JButton();
@@ -56,18 +81,121 @@ public class TelaAdm extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setResizable(false);
 
+        buttonGroup1.add(radioPorPalavra);
+        radioPorPalavra.setSelected(true);
+        radioPorPalavra.setText("Por Palavra");
+
+        buttonGroup1.add(radioPorLetra);
+        radioPorLetra.setText("Por letra inicial");
+
+        buttonGroup1.add(radioPorQuantidade);
+        radioPorQuantidade.setText("Por Quantidade");
+        radioPorQuantidade.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                radioPorQuantidadeActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioFraseExata);
+        radioFraseExata.setText("Frase Exata");
+
+        botaoBuscar.setText("Buscar");
+        botaoBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botaoBuscarActionPerformed(evt);
+            }
+        });
+
+        buttonGroup1.add(radioBuscaLivre);
+        radioBuscaLivre.setText("Livre");
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(28, 28, 28)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(radioPorLetra)
+                    .addComponent(radioPorQuantidade)
+                    .addComponent(radioPorPalavra))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(campoPorQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(campoPorLetra, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(botaoBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 87, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(98, 98, 98)
+                                .addComponent(radioBuscaLivre)
+                                .addGap(0, 0, Short.MAX_VALUE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(campoPorPalavra, javax.swing.GroupLayout.PREFERRED_SIZE, 93, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(62, 62, 62)
+                        .addComponent(radioFraseExata)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(campoBuscaLivre)
+                            .addComponent(campoPorFraseExata, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE))))
+                .addContainerGap(81, Short.MAX_VALUE))
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioPorPalavra)
+                    .addComponent(campoPorPalavra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radioFraseExata)
+                    .addComponent(campoPorFraseExata, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(radioPorLetra)
+                            .addComponent(campoPorLetra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(radioBuscaLivre)
+                            .addComponent(campoBuscaLivre, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(radioPorQuantidade)
+                    .addComponent(campoPorQuantidade, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(botaoBuscar))
+                .addContainerGap(19, Short.MAX_VALUE))
+        );
+
+        listaBusca.setModel(listaBuscaDeExpressoesModel);
+        jScrollPane1.setViewportView(listaBusca);
+
         javax.swing.GroupLayout painelBuscaLayout = new javax.swing.GroupLayout(painelBusca);
         painelBusca.setLayout(painelBuscaLayout);
         painelBuscaLayout.setHorizontalGroup(
             painelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 592, Short.MAX_VALUE)
+            .addGroup(painelBuscaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(painelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
         painelBuscaLayout.setVerticalGroup(
             painelBuscaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 267, Short.MAX_VALUE)
+            .addGroup(painelBuscaLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(12, Short.MAX_VALUE))
         );
 
-        jTabbedPane1.addTab("Busca de Expressões", painelBusca);
+        listaAdm.addTab("Busca de Expressões", painelBusca);
 
         painelAlteracao.setFocusCycleRoot(true);
 
@@ -118,7 +246,7 @@ public class TelaAdm extends javax.swing.JFrame {
                 .addGap(42, 42, 42))
         );
 
-        jList2.setModel(listDeExpressoes);
+        jList2.setModel(listaAdmDeExpressoesModel);
         jScrollPane2.setViewportView(jList2);
 
         javax.swing.GroupLayout painelAlteracaoLayout = new javax.swing.GroupLayout(painelAlteracao);
@@ -129,20 +257,20 @@ public class TelaAdm extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(painelAlteracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane2))
+                    .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
         painelAlteracaoLayout.setVerticalGroup(
             painelAlteracaoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(painelAlteracaoLayout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(21, 21, 21)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 36, Short.MAX_VALUE)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
-        jTabbedPane1.addTab("Alteração de Expressões", painelAlteracao);
+        listaAdm.addTab("Alteração de Expressões", painelAlteracao);
 
         botaoLogin.setText("Login");
         botaoLogin.setName("botaoLogin"); // NOI18N
@@ -161,7 +289,7 @@ public class TelaAdm extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jTabbedPane1)
+                    .addComponent(listaAdm)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(loginLabel)
@@ -173,7 +301,7 @@ public class TelaAdm extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jTabbedPane1)
+                .addComponent(listaAdm)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(botaoLogin)
@@ -210,13 +338,13 @@ public class TelaAdm extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-        
+
         Boolean succeeded = CatalogoController.getInstance().removerExpressao(this.jList2.getSelectedValue());
 
         if (succeeded) {
             JOptionPane.showMessageDialog(TelaAdm.this, "Expressão Removida", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            this.carregarCatalogo();
+            this.carregarListaAdm();
 
         } else {
             JOptionPane.showMessageDialog(TelaAdm.this, "Erro ao remover expressão: Expressão não encontrada", "Erro",
@@ -225,11 +353,50 @@ public class TelaAdm extends javax.swing.JFrame {
 
     }//GEN-LAST:event_botaoRemoverActionPerformed
 
+    private void radioPorQuantidadeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radioPorQuantidadeActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_radioPorQuantidadeActionPerformed
+
+    private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
+
+        if (radioPorLetra.isSelected()) {
+            if (campoPorLetra.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorLetraInicial(this.campoPorLetra.getText().trim().toLowerCase().charAt(0)));
+        }else if(radioPorQuantidade.isSelected()){
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorNumeroPalavras((int)campoPorQuantidade.getValue()));
+        }else if(radioPorPalavra.isSelected()){
+            if (campoPorPalavra.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorPalavra(this.campoPorPalavra.getText().trim().toLowerCase()));
+        }else if(radioFraseExata.isSelected()){
+            if (campoPorFraseExata.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseExata(this.campoPorFraseExata.getText().trim().toLowerCase()));
+        }else if(radioBuscaLivre.isSelected()){
+            if (campoBuscaLivre.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
+                        JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseLivre(this.campoBuscaLivre.getText().trim().toLowerCase()));
+        }
+    }//GEN-LAST:event_botaoBuscarActionPerformed
+
     public void loginSucedido(UsuarioVO usuarioVO) {
-        this.jTabbedPane1.setEnabledAt(1, true);
+        this.listaAdm.setEnabledAt(1, true);
         this.botaoLogin.setVisible(false);
         this.loginLabel.setText("Administrador " + usuarioVO.getNome() + " logado");
-        carregarCatalogo();
+        carregarListaAdm();
     }
 
     /**
@@ -260,21 +427,36 @@ public class TelaAdm extends javax.swing.JFrame {
         java.awt.EventQueue.invokeLater(() -> {
             TelaAdm tela = new TelaAdm();
             tela.setVisible(true);
-            tela.jTabbedPane1.setEnabledAt(1, false);
+            tela.listaAdm.setEnabledAt(1, false);
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAdicionar;
     private javax.swing.JButton botaoAlterar;
+    private javax.swing.JButton botaoBuscar;
     private javax.swing.JButton botaoLogin;
     private javax.swing.JButton botaoRemover;
+    private javax.swing.ButtonGroup buttonGroup1;
+    private javax.swing.JTextField campoBuscaLivre;
+    private javax.swing.JTextField campoPorFraseExata;
+    private javax.swing.JTextField campoPorLetra;
+    private javax.swing.JTextField campoPorPalavra;
+    private javax.swing.JSpinner campoPorQuantidade;
     private javax.swing.JList<Expressao> jList2;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTabbedPane jTabbedPane1;
+    private javax.swing.JTabbedPane listaAdm;
+    private javax.swing.JList<Expressao> listaBusca;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel painelAlteracao;
     private javax.swing.JPanel painelBusca;
+    private javax.swing.JRadioButton radioBuscaLivre;
+    private javax.swing.JRadioButton radioFraseExata;
+    private javax.swing.JRadioButton radioPorLetra;
+    private javax.swing.JRadioButton radioPorPalavra;
+    private javax.swing.JRadioButton radioPorQuantidade;
     // End of variables declaration//GEN-END:variables
 }

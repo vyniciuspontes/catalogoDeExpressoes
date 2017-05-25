@@ -122,7 +122,7 @@ public class AlterarExpressaoDialog extends javax.swing.JDialog {
         if (succeeded) {
             JOptionPane.showMessageDialog(AlterarExpressaoDialog.this, "Expressão Alterada", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            adm.carregarCatalogo();
+            adm.carregarListaAdm();
             this.dispose();
 
         } else {
