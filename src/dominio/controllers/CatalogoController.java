@@ -47,16 +47,16 @@ public class CatalogoController {
     }
 
     public boolean alterarExpressao(String anterior, String novoTexto) {
-        return this.catalogo.alterarExpressao(anterior, novoTexto);
+        return this.catalogo.alterarExpressao(anterior.trim().toLowerCase(), novoTexto.trim().toLowerCase());
     }
     
-    public List<String> listarPorLetraInicial(char letra) {
+    public List<String> listarPorLetraInicial(String letra) {
         
-        return this.catalogo.listarPorLetraInicial(letra);
+        return this.catalogo.listarPorLetraInicial(letra.trim().toLowerCase().charAt(0));
     }
 
     public List<String> listarPorPalavra(String palavra) {
-        return this.catalogo.listarPorPalavra(palavra);
+        return this.catalogo.listarPorPalavra(palavra.trim().toLowerCase());
     }
 
     public List<String> listarPorNumeroPalavras(int numero) {
@@ -64,15 +64,15 @@ public class CatalogoController {
     }
     
     public boolean removerExpressao(String expressao){
-        return this.catalogo.removerExpressao(expressao);
+        return this.catalogo.removerExpressao(expressao.trim().toLowerCase());
     }
 
     public List<String> listarPorFraseExata(String frase) {
-        return this.catalogo.listarPorFraseExata(frase);
+        return this.catalogo.listarPorFraseExata(frase.trim().toLowerCase());
     }
 
     public List<String> listarPorFraseLivre(String frase) {
-        return this.catalogo.listarPorFraseLivre(frase);
+        return this.catalogo.listarPorFraseLivre(frase.trim().toLowerCase());
     }
 
 }

@@ -363,7 +363,7 @@ public class TelaAdm extends javax.swing.JFrame {
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorLetraInicial(this.campoPorLetra.getText().trim().toLowerCase().charAt(0)));
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorLetraInicial(this.campoPorLetra.getText()));
         }else if(radioPorQuantidade.isSelected()){
             this.carregarListaBusca(CatalogoController.getInstance().listarPorNumeroPalavras((int)campoPorQuantidade.getValue()));
         }else if(radioPorPalavra.isSelected()){
@@ -372,21 +372,21 @@ public class TelaAdm extends javax.swing.JFrame {
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorPalavra(this.campoPorPalavra.getText().trim().toLowerCase()));
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorPalavra(this.campoPorPalavra.getText()));
         }else if(radioFraseExata.isSelected()){
             if (campoPorFraseExata.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseExata(this.campoPorFraseExata.getText().trim().toLowerCase()));
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseExata(this.campoPorFraseExata.getText()));
         }else if(radioBuscaLivre.isSelected()){
             if (campoBuscaLivre.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseLivre(this.campoBuscaLivre.getText().trim().toLowerCase()));
+            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseLivre(this.campoBuscaLivre.getText()));
         }
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
