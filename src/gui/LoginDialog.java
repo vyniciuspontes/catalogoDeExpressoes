@@ -147,13 +147,12 @@ public class LoginDialog extends javax.swing.JDialog {
             return;
         }
         String password = String.copyValueOf(passwordField.getPassword());
-        Usuario usuario = LoginController.getInstance().fazerLogin(loginTextField.getText(), password);
+        String nomeUsuario = LoginController.getInstance().fazerLogin(loginTextField.getText(), password);
 
-        if (usuario != null) {
-            String nome = usuario.getNome();
-            JOptionPane.showMessageDialog(LoginDialog.this, "Bem vindo " + nome, "Sucesso",
+        if (nomeUsuario != null) {
+            JOptionPane.showMessageDialog(LoginDialog.this, "Bem vindo " + nomeUsuario, "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            adm.loginSucedido(usuario);
+            adm.loginSucedido(nomeUsuario);
             this.dispose();
             
         } else {

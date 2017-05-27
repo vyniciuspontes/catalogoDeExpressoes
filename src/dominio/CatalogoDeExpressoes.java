@@ -31,92 +31,88 @@ public class CatalogoDeExpressoes {
         });
     }
 
-    public boolean adicionarExpressao(Expressao expressao) {
+    public boolean adicionarExpressao(String texto) {
 
-        if (contemExpressao(expressao)) {
+        Expressao exp = recuperarExpressao(texto);
+        
+        if (exp == null) {
             return false;
         }
 
-        this.listaDeExpressoes.add(expressao);
+        this.listaDeExpressoes.add(exp);
 
         salvarCatalogo();
         return true;
     }
 
-    public Boolean alterarExpressao(Expressao exp, Expressao novaExpressao) {
+    public Boolean alterarExpressao(String textoAntigo, String novaTexto) {
 
-        if (contemExpressao(novaExpressao)) {
+        Expressao exp = recuperarExpressao(textoAntigo);
+        Expressao novaExpressao = new Expressao(novaTexto);
+        if (exp == null) {
             return false;
         }
 
-        Expressao found = listaDeExpressoes.stream()
-                .filter(x -> exp.equals(x))
-                .findAny()
-                .orElse(null);
-
-        if (found == null) {
-            return null;
-        }
-
-        found.setTexto(novaExpressao.getTexto());
+        exp.setTexto(novaExpressao.getTexto());
 
         salvarCatalogo();
 
         return true;
     }
 
-    public boolean removerExpressao(Expressao expressao) {
-
-        if (!contemExpressao(expressao)) {
+    public boolean removerExpressao(String expressao) {
+        Expressao exp = recuperarExpressao(expressao);
+        if (exp == null) {
             return false;
         }
 
-        this.listaDeExpressoes.remove(expressao);
+        this.listaDeExpressoes.remove(exp);
         salvarCatalogo();
 
         return true;
     }
 
-    public List<Expressao> listarPorLetraInicial(char letra) {
-        List<Expressao> result = listaDeExpressoes.stream()
-                .filter(expressao -> expressao.getTexto().charAt(0) == letra)
+    public List<String> listarPorLetraInicial(char letra) {
+        List<String> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().charAt(0) == letra).map(t -> t.getTexto())
                 .collect(Collectors.toList());
 
         return result;
     }
 
-    public List<Expressao> listarExpressoes() {
-        return this.listaDeExpressoes;
+    public List<String> listarExpressoes() {
+        return this.listaDeExpressoes.stream().map(t -> t.getTexto())
+                .collect(Collectors.toList());
     }
 
-    public List<Expressao> listarPorFraseLivre(String frase) {
-        List<Expressao> result = listaDeExpressoes.stream()
-                .filter(expressao -> expressao.getTexto().contains(frase))
+    public List<String> listarPorFraseLivre(String frase) {
+        List<String> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().contains(frase)).map(t -> t.getTexto())
                 .collect(Collectors.toList());
 
         return result;
     }
 
-    public List<Expressao> listarPorNumeroPalavras(int numero) {
-        List<Expressao> result = listaDeExpressoes.stream()
-                .filter(expressao -> expressao.getTexto().trim().split(" ").length == numero)
+    public List<String> listarPorNumeroPalavras(int numero) {
+        List<String> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().trim().split(" ").length == numero).map(t -> t.getTexto())
                 .collect(Collectors.toList());
 
         return result;
     }
 
-    public List<Expressao> listarPorFraseExata(String frase) {
-        List<Expressao> result = listaDeExpressoes.stream()
-                .filter(expressao -> expressao.getTexto().equals(frase))
+    public List<String> listarPorFraseExata(String frase) {
+        List<String> result = listaDeExpressoes.stream()
+                .filter(expressao -> expressao.getTexto().equals(frase)).map(t -> t.getTexto())
                 .collect(Collectors.toList());
 
         return result;
     }
 
-    public List<Expressao> listarPorPalavra(String palavra) {
+    public List<String> listarPorPalavra(String palavra) {
 
-        List<Expressao> result = listaDeExpressoes.stream()
-                .filter(expressao -> checkExpressaoContemPalavra(expressao, palavra))
+        List<String> result = listaDeExpressoes.stream()
+                .filter(expressao -> checkExpressaoContemPalavra(expressao, palavra)).map(t -> t.getTexto())
                 .collect(Collectors.toList());
 
         return result;
@@ -129,9 +125,9 @@ public class CatalogoDeExpressoes {
 
         return expressaoSplitList.contains(palavra);
     }
-
-    public boolean contemExpressao(Expressao expressao) {
-        return listaDeExpressoes.contains(expressao);
+    
+    public Expressao recuperarExpressao(String texto){
+        return this.listaDeExpressoes.stream().filter(p -> p.getTexto().equals(texto)).findAny().orElse(null);
     }
 
     private boolean salvarCatalogo() {

@@ -5,8 +5,6 @@
  */
 package gui;
 
-import dominio.Expressao;
-import dominio.Usuario;
 import dominio.controllers.CatalogoController;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -35,7 +33,7 @@ public class TelaAdm extends javax.swing.JFrame {
         });
     }
     
-    private void carregarListaBusca(List<Expressao> expressoes) {
+    private void carregarListaBusca(List<String> expressoes) {
         listaBuscaDeExpressoesModel.clear();
         expressoes.forEach((expressao) -> {
             listaBuscaDeExpressoesModel.addElement(expressao);
@@ -392,10 +390,10 @@ public class TelaAdm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
-    public void loginSucedido(Usuario usuarioVO) {
+    public void loginSucedido(String nomeUsuario) {
         this.listaAdm.setEnabledAt(1, true);
         this.botaoLogin.setVisible(false);
-        this.loginLabel.setText("Administrador " + usuarioVO.getNome() + " logado");
+        this.loginLabel.setText("Administrador " + nomeUsuario + " logado");
         carregarListaAdm();
     }
 
@@ -443,13 +441,13 @@ public class TelaAdm extends javax.swing.JFrame {
     private javax.swing.JTextField campoPorLetra;
     private javax.swing.JTextField campoPorPalavra;
     private javax.swing.JSpinner campoPorQuantidade;
-    private javax.swing.JList<Expressao> jList2;
+    private javax.swing.JList<String> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane listaAdm;
-    private javax.swing.JList<Expressao> listaBusca;
+    private javax.swing.JList<String> listaBusca;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel painelAlteracao;
     private javax.swing.JPanel painelBusca;

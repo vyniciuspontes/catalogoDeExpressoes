@@ -21,12 +21,12 @@ public class LoginController {
         }
     }
 
-    public Usuario fazerLogin(String login, String senha) {
+    public String fazerLogin(String login, String senha) {
         
         UsuarioDTO dto = LoginDAO.getInstance().autenticar(login, senha);
         
         if(dto != null)
-            return new Usuario(dto.getNome(), dto.getLogin());
+            return new Usuario(dto.getNome(), dto.getLogin()).getNome();
         
         return null;
     }

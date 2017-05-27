@@ -6,8 +6,6 @@
 package dominio.controllers;
 
 import dominio.CatalogoDeExpressoes;
-import dominio.Expressao;
-import servicostecnicos.CatalogoDAO;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -40,41 +38,40 @@ public class CatalogoController {
         return false;
     }
     
-    public List<Expressao> listarExpressoes(){
+    public List<String> listarExpressoes(){
         return this.catalogo.listarExpressoes();
     }
 
     public boolean adicionarExpressao(String exp) {
-        Expressao novaExpressao = new Expressao(exp);
-        return this.catalogo.adicionarExpressao(novaExpressao);
+        return this.catalogo.adicionarExpressao(exp);
     }
 
-    public boolean alterarExpressao(Expressao anterior, String novoTexto) {
-        Expressao novaExpressao = new Expressao(novoTexto);
-        return this.catalogo.alterarExpressao(anterior, novaExpressao);
+    public boolean alterarExpressao(String anterior, String novoTexto) {
+        return this.catalogo.alterarExpressao(anterior, novoTexto);
     }
-
-    public List<Expressao> listarPorLetraInicial(char letra) {
+    
+    public List<String> listarPorLetraInicial(char letra) {
+        
         return this.catalogo.listarPorLetraInicial(letra);
     }
 
-    public List<Expressao> listarPorPalavra(String palavra) {
+    public List<String> listarPorPalavra(String palavra) {
         return this.catalogo.listarPorPalavra(palavra);
     }
 
-    public List<Expressao> listarPorNumeroPalavras(int numero) {
+    public List<String> listarPorNumeroPalavras(int numero) {
         return this.catalogo.listarPorNumeroPalavras(numero);
     }
     
-    public boolean removerExpressao(Expressao expressao){
+    public boolean removerExpressao(String expressao){
         return this.catalogo.removerExpressao(expressao);
     }
 
-    public List<Expressao> listarPorFraseExata(String frase) {
+    public List<String> listarPorFraseExata(String frase) {
         return this.catalogo.listarPorFraseExata(frase);
     }
 
-    public List<Expressao> listarPorFraseLivre(String frase) {
+    public List<String> listarPorFraseLivre(String frase) {
         return this.catalogo.listarPorFraseLivre(frase);
     }
 
