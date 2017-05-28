@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 public class CatalogoDAO {
 
-    private final String ARQUIVO = "catalogo.txt";
+    private final String nomeArquivo = "catalogo.txt";
 
     private static CatalogoDAO instance;
 
@@ -31,7 +31,7 @@ public class CatalogoDAO {
     }
 
     public boolean salvarCatalogo(List<String> catalogo) {
-        File catalagoFile = new File(ARQUIVO);
+        File catalagoFile = new File(nomeArquivo);
         try {
             PrintStream printStream = new PrintStream(catalagoFile);
             
@@ -52,7 +52,7 @@ public class CatalogoDAO {
 
     public List<String> lerCatalogo() {
         try {
-            File catalagoFile = new File(ARQUIVO);
+            File catalagoFile = new File(nomeArquivo);
             List<String> list = new ArrayList<>();
             if (!catalagoFile.exists()) {
                 catalagoFile.createNewFile();
