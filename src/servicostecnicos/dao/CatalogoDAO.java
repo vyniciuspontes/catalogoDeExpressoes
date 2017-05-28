@@ -1,4 +1,4 @@
-package servicostecnicos;
+package servicostecnicos.dao;
 
 import java.io.File;
 import java.io.FileOutputStream;

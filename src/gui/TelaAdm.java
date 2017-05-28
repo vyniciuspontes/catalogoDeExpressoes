@@ -5,6 +5,7 @@
  */
 package gui;
 
+import dominio.Expressao;
 import dominio.controllers.CatalogoController;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -33,7 +34,7 @@ public class TelaAdm extends javax.swing.JFrame {
         });
     }
     
-    private void carregarListaBusca(List<String> expressoes) {
+    private void carregarListaBusca(List<Expressao> expressoes) {
         listaBuscaDeExpressoesModel.clear();
         expressoes.forEach((expressao) -> {
             listaBuscaDeExpressoesModel.addElement(expressao);
@@ -322,11 +323,11 @@ public class TelaAdm extends javax.swing.JFrame {
             return;
         }
         System.out.println(this.jList2.getSelectedValue());
-        new AlterarExpressaoDialog(this, false, this.jList2.getSelectedValue()).setVisible(true);
+        new AlterarExpressaoDialog(this, this.jList2.getSelectedValue()).setVisible(true);
     }//GEN-LAST:event_botaoAlterarActionPerformed
 
     private void botaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarActionPerformed
-        new AdicionarExpressaoDialog(this, false).setVisible(true);
+        new AdicionarExpressaoDialog(this).setVisible(true);
     }//GEN-LAST:event_botaoAdicionarActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
@@ -441,13 +442,13 @@ public class TelaAdm extends javax.swing.JFrame {
     private javax.swing.JTextField campoPorLetra;
     private javax.swing.JTextField campoPorPalavra;
     private javax.swing.JSpinner campoPorQuantidade;
-    private javax.swing.JList<String> jList2;
+    private javax.swing.JList<Expressao> jList2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane listaAdm;
-    private javax.swing.JList<String> listaBusca;
+    private javax.swing.JList<Expressao> listaBusca;
     private javax.swing.JLabel loginLabel;
     private javax.swing.JPanel painelAlteracao;
     private javax.swing.JPanel painelBusca;

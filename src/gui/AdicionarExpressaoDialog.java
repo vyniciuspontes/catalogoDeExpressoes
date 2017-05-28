@@ -5,12 +5,9 @@
  */
 package gui;
 
-import dominio.Usuario;
 import dominio.controllers.CatalogoController;
-import dominio.controllers.LoginController;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
-import servicostecnicos.CatalogoDAO;
 
 /**
  *
@@ -24,10 +21,9 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
      * Creates new form AdicionarExpressaoDialog
      *
      * @param parent
-     * @param modal
      */
-    public AdicionarExpressaoDialog(Frame parent, boolean modal) {
-        super(parent, modal);
+    public AdicionarExpressaoDialog(Frame parent) {
+        super(parent, false);
         adm = (TelaAdm) parent;
         initComponents();
     }

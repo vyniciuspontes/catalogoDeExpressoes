@@ -17,21 +17,20 @@ import javax.swing.JOptionPane;
 public class AlterarExpressaoDialog extends javax.swing.JDialog {
 
     private final TelaAdm adm;
-    private String expressaoAtual;
+    private Expressao expressaoAtual;
 
     /**
      * Creates new form AdicionarExpressaoDialog
      *
      * @param parent
-     * @param modal
      * @param expressaoAtual
      */
-    public AlterarExpressaoDialog(Frame parent, boolean modal, String expressaoAtual) {
-        super(parent, modal);
+    public AlterarExpressaoDialog(Frame parent, Expressao expressaoAtual) {
+        super(parent, false);
         this.adm = (TelaAdm) parent;
         this.expressaoAtual = expressaoAtual;
         initComponents();
-        this.campoExpressao.setText(expressaoAtual);
+        this.campoExpressao.setText(expressaoAtual.getTexto());
     }
 
     /**
@@ -122,7 +121,6 @@ public class AlterarExpressaoDialog extends javax.swing.JDialog {
         if (succeeded) {
             JOptionPane.showMessageDialog(AlterarExpressaoDialog.this, "Expressão Alterada", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            adm.carregarListaAdm();
             this.dispose();
 
         } else {
