@@ -19,17 +19,18 @@ import javax.swing.UIManager;
 public class TelaAdm extends javax.swing.JFrame {
 
     private DefaultListModel listaAdmDeExpressoesModel = new DefaultListModel();
-
     private DefaultListModel listaBuscaDeExpressoesModel = new DefaultListModel();
+    private CatalogoController controller;
 
     public TelaAdm() {
+        this.controller = CatalogoController.getInstance();
         initComponents();
 
     }
 
     public void carregarListaAdm() {
         listaAdmDeExpressoesModel.clear();
-        CatalogoController.getInstance().listarExpressoes().forEach((expressao) -> {
+        this.controller.listarExpressoes().forEach((expressao) -> {
             listaAdmDeExpressoesModel.addElement(expressao);
         });
     }
@@ -323,11 +324,13 @@ public class TelaAdm extends javax.swing.JFrame {
             return;
         }
         System.out.println(this.jList2.getSelectedValue());
-        new AlterarExpressaoDialog(this, this.jList2.getSelectedValue()).setVisible(true);
+        AlterarExpressaoDialog dialog = new AlterarExpressaoDialog(this, this.controller, this.jList2.getSelectedValue());
+        dialog.setVisible(true);
     }//GEN-LAST:event_botaoAlterarActionPerformed
 
     private void botaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarActionPerformed
-        new AdicionarExpressaoDialog(this).setVisible(true);
+        AdicionarExpressaoDialog dialog = new AdicionarExpressaoDialog(this, controller);
+        dialog.setVisible(true);
     }//GEN-LAST:event_botaoAdicionarActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
@@ -337,8 +340,7 @@ public class TelaAdm extends javax.swing.JFrame {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        Boolean succeeded = CatalogoController.getInstance().removerExpressao(this.jList2.getSelectedValue());
+        Boolean succeeded = this.controller.removerExpressao(this.jList2.getSelectedValue());
 
         if (succeeded) {
             JOptionPane.showMessageDialog(TelaAdm.this, "Expressão Removida", "Sucesso",
@@ -357,37 +359,36 @@ public class TelaAdm extends javax.swing.JFrame {
     }//GEN-LAST:event_radioPorQuantidadeActionPerformed
 
     private void botaoBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoBuscarActionPerformed
-
         if (radioPorLetra.isSelected()) {
             if (campoPorLetra.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorLetraInicial(this.campoPorLetra.getText()));
+            this.carregarListaBusca(this.controller.listarPorLetraInicial(this.campoPorLetra.getText()));
         }else if(radioPorQuantidade.isSelected()){
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorNumeroPalavras((int)campoPorQuantidade.getValue()));
+            this.carregarListaBusca(this.controller.listarPorNumeroPalavras((int)campoPorQuantidade.getValue()));
         }else if(radioPorPalavra.isSelected()){
             if (campoPorPalavra.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorPalavra(this.campoPorPalavra.getText()));
+            this.carregarListaBusca(this.controller.listarPorPalavra(this.campoPorPalavra.getText()));
         }else if(radioFraseExata.isSelected()){
             if (campoPorFraseExata.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseExata(this.campoPorFraseExata.getText()));
+            this.carregarListaBusca(this.controller.listarPorFraseExata(this.campoPorFraseExata.getText()));
         }else if(radioBuscaLivre.isSelected()){
             if (campoBuscaLivre.getText().trim().isEmpty()) {
                 JOptionPane.showMessageDialog(TelaAdm.this, "Preencha todos os campos", "Campos vazios encontrados",
                         JOptionPane.WARNING_MESSAGE);
                 return;
             }
-            this.carregarListaBusca(CatalogoController.getInstance().listarPorFraseLivre(this.campoBuscaLivre.getText()));
+            this.carregarListaBusca(this.controller.listarPorFraseLivre(this.campoBuscaLivre.getText()));
         }
     }//GEN-LAST:event_botaoBuscarActionPerformed
 

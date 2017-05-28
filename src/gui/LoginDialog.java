@@ -16,8 +16,8 @@ import javax.swing.JOptionPane;
  */
 public class LoginDialog extends javax.swing.JDialog {
 
-    private final TelaAdm adm;
-    
+    private final TelaAdm telaAdm;
+    private LoginController loginController;
     /**
      * Creates new form LoginDialog
      *
@@ -26,7 +26,8 @@ public class LoginDialog extends javax.swing.JDialog {
      */
     public LoginDialog(JFrame parent, boolean modal) {
         super(parent, modal);
-        this.adm = (TelaAdm) parent;
+        this.telaAdm = (TelaAdm) parent;
+        this.loginController = LoginController.getInstance();
         initComponents();
     }
 
@@ -147,13 +148,13 @@ public class LoginDialog extends javax.swing.JDialog {
             return;
         }
         String password = String.copyValueOf(passwordField.getPassword());
-        Usuario usuario = LoginController.getInstance().fazerLogin(loginTextField.getText(), password);
+        Usuario usuario = this.loginController.fazerLogin(loginTextField.getText(), password);
 
         if (usuario != null) {
             String nome = usuario.getNome();
             JOptionPane.showMessageDialog(LoginDialog.this, "Bem vindo " + nome, "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            adm.loginSucedido(usuario.getNome());
+            telaAdm.loginSucedido(usuario.getNome());
             this.dispose();
             
         } else {

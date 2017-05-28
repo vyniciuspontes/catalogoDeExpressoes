@@ -18,13 +18,15 @@ import servicostecnicos.dao.CatalogoDAO;
 public class CatalogoDeExpressoes {
 
     private List<Expressao> listaDeExpressoes;
+    private CatalogoDAO catalogoDAO;
 
     public CatalogoDeExpressoes() {
+        this.catalogoDAO = CatalogoDAO.getInstance();
         initCatalogo();
     }
 
     private void initCatalogo() {
-        List<String> textos = CatalogoDAO.getInstance().lerCatalogo();
+        List<String> textos = catalogoDAO.lerCatalogo();
         listaDeExpressoes = new ArrayList<>();
         textos.forEach((texto) -> {
             listaDeExpressoes.add(new Expressao(texto.toLowerCase()));
@@ -141,7 +143,7 @@ public class CatalogoDeExpressoes {
             textos.add(expressao.getTexto().toLowerCase());
         });
 
-        return CatalogoDAO.getInstance().salvarCatalogo(textos);
+        return catalogoDAO.salvarCatalogo(textos);
 
     }
 }

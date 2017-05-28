@@ -37,7 +37,7 @@ public class CatalogoController {
     }
 
     public boolean adicionarExpressao(String exp) {
-        return this.catalogo.adicionarExpressao(exp);
+        return this.catalogo.adicionarExpressao(exp.trim().toLowerCase());
     }
 
     public boolean alterarExpressao(Expressao expressaoAtual, String novoTexto) {

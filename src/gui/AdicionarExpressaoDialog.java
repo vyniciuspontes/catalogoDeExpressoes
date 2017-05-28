@@ -16,14 +16,17 @@ import javax.swing.JOptionPane;
 public class AdicionarExpressaoDialog extends javax.swing.JDialog {
 
     private final TelaAdm adm;
+    private CatalogoController controller;
 
     /**
      * Creates new form AdicionarExpressaoDialog
      *
      * @param parent
+     * @param controller
      */
-    public AdicionarExpressaoDialog(Frame parent) {
+    public AdicionarExpressaoDialog(Frame parent, CatalogoController controller) {
         super(parent, false);
+        this.controller = controller;
         adm = (TelaAdm) parent;
         initComponents();
     }
@@ -110,8 +113,7 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
                     JOptionPane.WARNING_MESSAGE);
             return;
         }
-
-        Boolean succeeded = CatalogoController.getInstance().adicionarExpressao(campoExpressao.getText());
+        Boolean succeeded = controller.adicionarExpressao(campoExpressao.getText());
 
         if (succeeded) {
             JOptionPane.showMessageDialog(AdicionarExpressaoDialog.this, "Expressão Adicionada", "Sucesso",

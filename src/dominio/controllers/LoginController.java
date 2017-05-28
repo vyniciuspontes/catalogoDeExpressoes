@@ -11,7 +11,13 @@ import servicostecnicos.UsuarioDTO;
 public class LoginController {
 
     private static LoginController instance;
-
+    private Usuario usuarioAtual;
+    private LoginDAO dao;
+    
+    private LoginController(){
+        dao = LoginDAO.getInstance();
+    }
+    
     public static LoginController getInstance() {
 
         if (instance == null) {
@@ -22,11 +28,12 @@ public class LoginController {
     }
 
     public Usuario fazerLogin(String login, String senha) {
+        UsuarioDTO dto = dao.autenticar(login, senha);
         
-        UsuarioDTO dto = LoginDAO.getInstance().autenticar(login, senha);
-        
-        if(dto != null)
-            return new Usuario(dto.getNome(), dto.getLogin());
+        if(dto != null){
+            usuarioAtual = new Usuario(dto.getNome(), dto.getLogin());
+            return usuarioAtual;
+        }
         
         return null;
     }
