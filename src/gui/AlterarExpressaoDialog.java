@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
  */
 public class AlterarExpressaoDialog extends javax.swing.JDialog {
 
-    private Expressao expressaoAtual;
-    private CatalogoController controller;
-    private TelaAdm admFrame;
+    private final Expressao expressaoAtual;
+    private final CatalogoController controller;
+    private boolean alteracaoSucedida = false;
 
     /**
      * Creates new form AdicionarExpressaoDialog
@@ -28,8 +28,7 @@ public class AlterarExpressaoDialog extends javax.swing.JDialog {
      * @param expressaoAtual
      */
     public AlterarExpressaoDialog(Frame parent, CatalogoController controller, Expressao expressaoAtual) {
-        super(parent, false);
-        this.admFrame = (TelaAdm) parent;
+        super(parent, true);
         this.expressaoAtual = expressaoAtual;
         initComponents();
         this.campoExpressao.setText(expressaoAtual.getTexto());
@@ -123,7 +122,7 @@ public class AlterarExpressaoDialog extends javax.swing.JDialog {
         if (succeeded) {
             JOptionPane.showMessageDialog(AlterarExpressaoDialog.this, "Expressão Alterada", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            this.admFrame.carregarListaAdm();
+            this.alteracaoSucedida = true;
             this.dispose();
 
         } else {
@@ -131,7 +130,10 @@ public class AlterarExpressaoDialog extends javax.swing.JDialog {
                     JOptionPane.ERROR_MESSAGE);
         }
     }//GEN-LAST:event_botaoAlterarActionPerformed
-
+    
+    public boolean isAlteracaoSucedida(){
+        return this.alteracaoSucedida;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton botaoAlterar;

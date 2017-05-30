@@ -18,7 +18,7 @@ import servicostecnicos.dao.CatalogoDAO;
 public class CatalogoDeExpressoes {
 
     private List<Expressao> listaDeExpressoes;
-    private CatalogoDAO catalogoDAO;
+    private final CatalogoDAO catalogoDAO;
 
     public CatalogoDeExpressoes() {
         this.catalogoDAO = CatalogoDAO.getInstance();

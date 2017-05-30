@@ -16,21 +16,24 @@ import javax.swing.JOptionPane;
  */
 public class LoginDialog extends javax.swing.JDialog {
 
-    private final TelaAdm telaAdm;
-    private LoginController loginController;
+    private Usuario usuarioLogado;
+    private final LoginController loginController;
     /**
      * Creates new form LoginDialog
      *
      * @param parent
-     * @param modal
      */
-    public LoginDialog(JFrame parent, boolean modal) {
-        super(parent, modal);
-        this.telaAdm = (TelaAdm) parent;
+    public LoginDialog(JFrame parent) {
+        super(parent, true);
         this.loginController = LoginController.getInstance();
+        this.usuarioLogado = null;
         initComponents();
     }
 
+    public Usuario getUsuarioLogado(){
+        return this.usuarioLogado;
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -154,7 +157,7 @@ public class LoginDialog extends javax.swing.JDialog {
             String nome = usuario.getNome();
             JOptionPane.showMessageDialog(LoginDialog.this, "Bem vindo " + nome, "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            telaAdm.loginSucedido(usuario.getNome());
+            this.usuarioLogado = usuario;
             this.dispose();
             
         } else {

@@ -15,8 +15,8 @@ import javax.swing.JOptionPane;
  */
 public class AdicionarExpressaoDialog extends javax.swing.JDialog {
 
-    private final TelaAdm adm;
     private CatalogoController controller;
+    private boolean adicaoSucedida = false;
 
     /**
      * Creates new form AdicionarExpressaoDialog
@@ -25,9 +25,8 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
      * @param controller
      */
     public AdicionarExpressaoDialog(Frame parent, CatalogoController controller) {
-        super(parent, false);
+        super(parent, true);
         this.controller = controller;
-        adm = (TelaAdm) parent;
         initComponents();
     }
 
@@ -118,7 +117,7 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
         if (succeeded) {
             JOptionPane.showMessageDialog(AdicionarExpressaoDialog.this, "Expressão Adicionada", "Sucesso",
                     JOptionPane.INFORMATION_MESSAGE);
-            adm.carregarListaAdm();
+            this.adicaoSucedida = true;
             this.dispose();
 
         } else {
@@ -134,4 +133,8 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     // End of variables declaration//GEN-END:variables
+
+    public boolean isAdicaoSucedida() {
+        return this.adicaoSucedida;
+    }
 }

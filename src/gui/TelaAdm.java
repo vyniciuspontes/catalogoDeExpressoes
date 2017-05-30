@@ -6,6 +6,7 @@
 package gui;
 
 import dominio.Expressao;
+import dominio.Usuario;
 import dominio.controllers.CatalogoController;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -20,7 +21,7 @@ public class TelaAdm extends javax.swing.JFrame {
 
     private DefaultListModel listaAdmDeExpressoesModel = new DefaultListModel();
     private DefaultListModel listaBuscaDeExpressoesModel = new DefaultListModel();
-    private CatalogoController controller;
+    private final CatalogoController controller;
 
     public TelaAdm() {
         this.controller = CatalogoController.getInstance();
@@ -28,7 +29,7 @@ public class TelaAdm extends javax.swing.JFrame {
 
     }
 
-    public void carregarListaAdm() {
+    private void carregarListaAdm() {
         listaAdmDeExpressoesModel.clear();
         this.controller.listarExpressoes().forEach((expressao) -> {
             listaAdmDeExpressoesModel.addElement(expressao);
@@ -314,7 +315,11 @@ public class TelaAdm extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void botaoLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoLoginActionPerformed
-        new LoginDialog(this, false).setVisible(true);
+        LoginDialog dialog = new LoginDialog(this);
+        dialog.setVisible(true);
+        Usuario usuarioLogado = dialog.getUsuarioLogado();
+        if(dialog.getUsuarioLogado() != null)
+            this.atualizarLoginLabel(usuarioLogado.getNome());
     }//GEN-LAST:event_botaoLoginActionPerformed
 
     private void botaoAlterarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAlterarActionPerformed
@@ -326,11 +331,15 @@ public class TelaAdm extends javax.swing.JFrame {
         System.out.println(this.jList2.getSelectedValue());
         AlterarExpressaoDialog dialog = new AlterarExpressaoDialog(this, this.controller, this.jList2.getSelectedValue());
         dialog.setVisible(true);
+        if(dialog.isAlteracaoSucedida())
+            carregarListaAdm();
     }//GEN-LAST:event_botaoAlterarActionPerformed
 
     private void botaoAdicionarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoAdicionarActionPerformed
         AdicionarExpressaoDialog dialog = new AdicionarExpressaoDialog(this, controller);
         dialog.setVisible(true);
+        if(dialog.isAdicaoSucedida())
+            carregarListaAdm();
     }//GEN-LAST:event_botaoAdicionarActionPerformed
 
     private void botaoRemoverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botaoRemoverActionPerformed
@@ -392,10 +401,10 @@ public class TelaAdm extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_botaoBuscarActionPerformed
 
-    public void loginSucedido(String nomeUsuario) {
+    private void atualizarLoginLabel(String texto) {
         this.listaAdm.setEnabledAt(1, true);
         this.botaoLogin.setVisible(false);
-        this.loginLabel.setText("Administrador " + nomeUsuario + " logado");
+        this.loginLabel.setText("Administrador " + texto + " logado");
         carregarListaAdm();
     }
 
@@ -410,7 +419,7 @@ public class TelaAdm extends javax.swing.JFrame {
          */
         try {
 
-            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            UIManager.setLookAndFeel(UIManager.getCrossPlatformLookAndFeelClassName());
             /*for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
                     break;

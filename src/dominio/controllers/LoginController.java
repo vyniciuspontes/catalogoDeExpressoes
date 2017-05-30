@@ -11,8 +11,7 @@ import servicostecnicos.UsuarioDTO;
 public class LoginController {
 
     private static LoginController instance;
-    private Usuario usuarioAtual;
-    private LoginDAO dao;
+    private final LoginDAO dao;
     
     private LoginController(){
         dao = LoginDAO.getInstance();
@@ -31,8 +30,7 @@ public class LoginController {
         UsuarioDTO dto = dao.autenticar(login, senha);
         
         if(dto != null){
-            usuarioAtual = new Usuario(dto.getNome(), dto.getLogin());
-            return usuarioAtual;
+            return new Usuario(dto.getNome(), dto.getLogin());
         }
         
         return null;
