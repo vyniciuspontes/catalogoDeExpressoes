@@ -3,13 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dominio;
+package dominio.catalogos;
 
+import dominio.Expressao;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import servicostecnicos.dao.CatalogoDAO;
+import servicostecnicos.persistencia.PersistenciaCatalogo;
+import servicostecnicos.persistencia.PersistenciaCatalogoArquivo;
 
 /**
  *
@@ -18,15 +20,15 @@ import servicostecnicos.dao.CatalogoDAO;
 public class CatalogoDeExpressoes {
 
     private List<Expressao> listaDeExpressoes;
-    private final CatalogoDAO catalogoDAO;
+    private final PersistenciaCatalogo persistenciaArquivo;
 
     public CatalogoDeExpressoes() {
-        this.catalogoDAO = CatalogoDAO.getInstance();
+        this.persistenciaArquivo = PersistenciaCatalogoArquivo.getInstance();
         initCatalogo();
     }
 
     private void initCatalogo() {
-        List<String> textos = catalogoDAO.lerCatalogo();
+        List<String> textos = persistenciaArquivo.lerCatalogo();
         listaDeExpressoes = new ArrayList<>();
         textos.forEach((texto) -> {
             listaDeExpressoes.add(new Expressao(texto.toLowerCase()));
@@ -122,7 +124,7 @@ public class CatalogoDeExpressoes {
 
     private boolean checkExpressaoContemPalavra(Expressao expressao, String palavra) {
 
-        String[] expressaoSplit = expressao.getTexto().split(" ");
+        String[] expressaoSplit = expressao.getTexto().replace(",", "").replace(".", "").replace("!", "").replace("?","").split(" ");
         List<String> expressaoSplitList = Arrays.asList(expressaoSplit);
 
         return expressaoSplitList.contains(palavra);
@@ -143,7 +145,7 @@ public class CatalogoDeExpressoes {
             textos.add(expressao.getTexto().toLowerCase());
         });
 
-        return catalogoDAO.salvarCatalogo(textos);
+        return persistenciaArquivo.salvarCatalogo(textos);
 
     }
 }

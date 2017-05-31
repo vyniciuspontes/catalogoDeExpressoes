@@ -5,7 +5,7 @@
  */
 package dominio.controllers;
 
-import dominio.CatalogoDeExpressoes;
+import dominio.catalogos.CatalogoDeExpressoes;
 import dominio.Expressao;
 import java.util.List;
 
@@ -13,20 +13,20 @@ import java.util.List;
  *
  * @author marcussouza
  */
-public class CatalogoController {
+public class ExpressaoController {
 
     private CatalogoDeExpressoes catalogo;
 
-    private CatalogoController() {
+    private ExpressaoController() {
         this.catalogo = new CatalogoDeExpressoes();
     }
 
-    private static CatalogoController instance;
+    private static ExpressaoController instance;
 
-    static public CatalogoController getInstance() {
+    static public ExpressaoController getInstance() {
 
         if (instance == null) {
-            return new CatalogoController();
+            return new ExpressaoController();
         } else {
             return instance;
         }

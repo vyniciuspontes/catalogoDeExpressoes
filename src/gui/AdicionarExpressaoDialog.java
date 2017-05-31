@@ -5,7 +5,7 @@
  */
 package gui;
 
-import dominio.controllers.CatalogoController;
+import dominio.controllers.ExpressaoController;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 
@@ -15,7 +15,7 @@ import javax.swing.JOptionPane;
  */
 public class AdicionarExpressaoDialog extends javax.swing.JDialog {
 
-    private CatalogoController controller;
+    private ExpressaoController controller;
     private boolean adicaoSucedida = false;
 
     /**
@@ -24,7 +24,7 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
      * @param parent
      * @param controller
      */
-    public AdicionarExpressaoDialog(Frame parent, CatalogoController controller) {
+    public AdicionarExpressaoDialog(Frame parent, ExpressaoController controller) {
         super(parent, true);
         this.controller = controller;
         initComponents();

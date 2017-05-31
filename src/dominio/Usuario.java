@@ -13,10 +13,30 @@ public class Usuario {
 
     private String nome;
     private String login;
+    private String senha;
+    private boolean admin;
 
-    public Usuario(String nome, String login) {
+    public Usuario(String nome, String login, String senha, boolean admin) {
         this.nome = nome;
         this.login = login;
+        this.senha = senha;
+        this.admin = admin;
+    }
+
+    public String getSenha() {
+        return senha;
+    }
+
+    public void setSenha(String senha) {
+        this.senha = senha;
+    }
+
+    public boolean isAdmin() {
+        return admin;
+    }
+
+    public void setAdmin(boolean admin) {
+        this.admin = admin;
     }
 
     @Override

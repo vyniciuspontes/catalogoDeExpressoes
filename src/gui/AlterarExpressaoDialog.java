@@ -6,7 +6,7 @@
 package gui;
 
 import dominio.Expressao;
-import dominio.controllers.CatalogoController;
+import dominio.controllers.ExpressaoController;
 import java.awt.Frame;
 import javax.swing.JOptionPane;
 
@@ -17,7 +17,7 @@ import javax.swing.JOptionPane;
 public class AlterarExpressaoDialog extends javax.swing.JDialog {
 
     private final Expressao expressaoAtual;
-    private final CatalogoController controller;
+    private final ExpressaoController controller;
     private boolean alteracaoSucedida = false;
 
     /**
@@ -27,7 +27,7 @@ public class AlterarExpressaoDialog extends javax.swing.JDialog {
      * @param controller
      * @param expressaoAtual
      */
-    public AlterarExpressaoDialog(Frame parent, CatalogoController controller, Expressao expressaoAtual) {
+    public AlterarExpressaoDialog(Frame parent, ExpressaoController controller, Expressao expressaoAtual) {
         super(parent, true);
         this.expressaoAtual = expressaoAtual;
         initComponents();

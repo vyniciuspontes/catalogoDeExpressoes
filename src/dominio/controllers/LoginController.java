@@ -1,8 +1,7 @@
 package dominio.controllers;
 
 import dominio.Usuario;
-import servicostecnicos.dao.LoginDAO;
-import servicostecnicos.UsuarioDTO;
+import dominio.catalogos.CatalogoDeUsuarios;
 
 /**
  *
@@ -11,10 +10,10 @@ import servicostecnicos.UsuarioDTO;
 public class LoginController {
 
     private static LoginController instance;
-    private final LoginDAO dao;
+    private final CatalogoDeUsuarios dao;
     
     private LoginController(){
-        dao = LoginDAO.getInstance();
+        dao = CatalogoDeUsuarios.getInstance();
     }
     
     public static LoginController getInstance() {
@@ -27,12 +26,8 @@ public class LoginController {
     }
 
     public Usuario fazerLogin(String login, String senha) {
-        UsuarioDTO dto = dao.autenticar(login, senha);
+        Usuario usuario = dao.getAdministrador(login, senha);
         
-        if(dto != null){
-            return new Usuario(dto.getNome(), dto.getLogin());
-        }
-        
-        return null;
+        return usuario;
     }
 }

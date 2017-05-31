@@ -1,9 +1,7 @@
-package servicostecnicos.dao;
+package servicostecnicos.persistencia;
 
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.ObjectOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -15,41 +13,38 @@ import java.util.logging.Logger;
  *
  * @author marcussouza
  */
-public class CatalogoDAO {
+public class PersistenciaCatalogoArquivo implements PersistenciaCatalogo{
 
     private final String nomeArquivo = "catalogo.txt";
 
-    private static CatalogoDAO instance;
+    private static PersistenciaCatalogoArquivo instance;
 
-    public static CatalogoDAO getInstance() {
+    public static PersistenciaCatalogoArquivo getInstance() {
 
         if (instance == null) {
-            return new CatalogoDAO();
+            return new PersistenciaCatalogoArquivo();
         } else {
             return instance;
         }
     }
 
+    @Override
     public boolean salvarCatalogo(List<String> catalogo) {
         File catalagoFile = new File(nomeArquivo);
         try {
             PrintStream printStream = new PrintStream(catalagoFile);
-            
+
             for (String string : catalogo) {
                 printStream.append(string);
                 printStream.println();
             }
-            
-            /*catalogo.forEach((string) -> {
-                printStream.append(string);
-                printStream.println();
-            });*/
             return true;
         } catch (IOException e) {
             return false;
         }
     }
 
+    @Override
     public List<String> lerCatalogo() {
         try {
             File catalagoFile = new File(nomeArquivo);
@@ -60,15 +55,16 @@ public class CatalogoDAO {
             }
 
             Scanner scanner = new Scanner(catalagoFile);
-            if (catalagoFile.length() == 0)
+            if (catalagoFile.length() == 0) {
                 return list;
+            }
             while (scanner.hasNext()) {
                 list.add(scanner.nextLine());
             }
 
             return list;
         } catch (IOException ex) {
-            Logger.getLogger(CatalogoDAO.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(PersistenciaCatalogoArquivo.class.getName()).log(Level.SEVERE, null, ex);
         }
 
         return null;
