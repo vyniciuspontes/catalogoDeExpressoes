@@ -15,7 +15,7 @@ import servicostecnicos.persistencia.PersistenciaCatalogoArquivo;
 
 /**
  *
- * @author marcussouza
+ * @author Vynicius
  */
 public class CatalogoDeExpressoes {
 

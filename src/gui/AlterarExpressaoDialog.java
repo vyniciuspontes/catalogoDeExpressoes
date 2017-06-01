@@ -7,7 +7,7 @@ package gui;
 
 import dominio.Expressao;
 import dominio.controllers.ExpressaoController;
-import java.awt.Frame;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,7 +27,7 @@ public class AlterarExpressaoDialog extends javax.swing.JDialog {
      * @param controller
      * @param expressaoAtual
      */
-    public AlterarExpressaoDialog(Frame parent, ExpressaoController controller, Expressao expressaoAtual) {
+    public AlterarExpressaoDialog(JFrame parent, ExpressaoController controller, Expressao expressaoAtual) {
         super(parent, true);
         this.expressaoAtual = expressaoAtual;
         initComponents();

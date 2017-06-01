@@ -6,7 +6,7 @@
 package gui;
 
 import dominio.controllers.ExpressaoController;
-import java.awt.Frame;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 /**
@@ -24,7 +24,7 @@ public class AdicionarExpressaoDialog extends javax.swing.JDialog {
      * @param parent
      * @param controller
      */
-    public AdicionarExpressaoDialog(Frame parent, ExpressaoController controller) {
+    public AdicionarExpressaoDialog(JFrame parent, ExpressaoController controller) {
         super(parent, true);
         this.controller = controller;
         initComponents();

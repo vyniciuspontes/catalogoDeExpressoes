@@ -30,7 +30,7 @@ public class Expressao implements Serializable{
 
     @Override
     public String toString() {
-        return "Expressao { " + "texto=" + texto + " }";
+        return texto;
     }
 
     @Override
