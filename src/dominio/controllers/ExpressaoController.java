@@ -6,7 +6,7 @@
 package dominio.controllers;
 
 import dominio.catalogos.CatalogoDeExpressoes;
-import dominio.Expressao;
+import dominio.modelos.Expressao;
 import java.util.List;
 
 /**

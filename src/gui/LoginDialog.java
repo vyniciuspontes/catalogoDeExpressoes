@@ -6,7 +6,7 @@
 package gui;
 
 import dominio.controllers.LoginController;
-import dominio.Usuario;
+import dominio.modelos.Usuario;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 

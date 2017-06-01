@@ -5,7 +5,7 @@
  */
 package gui;
 
-import dominio.Expressao;
+import dominio.modelos.Expressao;
 import dominio.controllers.ExpressaoController;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;

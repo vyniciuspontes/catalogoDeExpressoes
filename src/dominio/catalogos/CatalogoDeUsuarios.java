@@ -5,7 +5,7 @@
  */
 package dominio.catalogos;
 
-import dominio.Usuario;
+import dominio.modelos.Usuario;
 import java.util.HashMap;
 import java.util.Map;
 

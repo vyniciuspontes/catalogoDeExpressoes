@@ -3,16 +3,15 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package dominio;
+package dominio.modelos;
 
-import java.io.Serializable;
 import java.util.Objects;
 
 /**
  *
  * @author marcussouza
  */
-public class Expressao implements Serializable{
+public class Expressao {
 
     private String texto;
 

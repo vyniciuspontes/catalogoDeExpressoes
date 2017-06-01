@@ -1,6 +1,6 @@
 package dominio.controllers;
 
-import dominio.Usuario;
+import dominio.modelos.Usuario;
 import dominio.catalogos.CatalogoDeUsuarios;
 
 /**

@@ -5,7 +5,7 @@
  */
 package dominio.catalogos;
 
-import dominio.Expressao;
+import dominio.modelos.Expressao;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

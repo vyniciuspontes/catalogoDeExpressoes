@@ -5,8 +5,8 @@
  */
 package gui;
 
-import dominio.Expressao;
-import dominio.Usuario;
+import dominio.modelos.Expressao;
+import dominio.modelos.Usuario;
 import dominio.controllers.ExpressaoController;
 import java.util.List;
 import javax.swing.DefaultListModel;
